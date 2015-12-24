@@ -1,0 +1,1 @@
+<div style="margin: 15px;"><table style="border-style: none;"><tr><td>Agent ID</td><td>{AgentID}</td></tr><tr><td>Agent Name</td><td>{AgentName}</td></tr><tr><td>Agent Quota</td><td>{AgentQuota></td></tr></table><div> {sData} {cData} </div></div>
