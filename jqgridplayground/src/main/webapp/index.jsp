@@ -44,18 +44,25 @@
 
 <link rel="stylesheet" type="text/css" href="http://rawgit.com/free-jqgrid/jqGrid/master/css/ui.jqgrid.css"/>
 
-
-</style>
 </head>
 <body>
 	<h2>jqGrid Playground</h2>
 	<article>This playground is showing how to achieve some of
 		the features in jqGrid.</article>
-	
-	<table id="grid1"></table>
-	<!-- 
-	<div id="grid1-nav"></div>
-	 -->
+
+	<div>
+		<div id="grid1wrapper">
+			<table id="grid1"></table>
+			<!-- 
+			<div id="grid1-nav"></div>
+			 -->
+		</div>
+		
+		<div id="grid2wrapper">
+			<table id="grid2"></table>
+		</div>
+	</div>
+
 
 
 
@@ -63,6 +70,7 @@
 	$(document).ready(function() {
 		var template = '<%@ include file="jqGrid1InputForm.jsp" %>';
 		
+		// agent grid
 		$('#grid1').jqGrid({
 			url: 'agent.json',
 			editurl: 'clientArray',
@@ -72,6 +80,7 @@
 					label: 'Agent ID',
 					name: 'AgentID',
 					width: 50,
+					rowId: true,
 					editable: true,
 					editrules: {required: true}
 			    },
@@ -94,7 +103,78 @@
 			viewrecords: true,
 			width: 780,
 			height: 150,
-			caption: "My Demo",
+			caption: "Agent List",
+			rownum: 5,
+			rowList: [5, 10, 20, "10000:All" ],
+			pager: true,
+			iconSet: 'fontAwesome',
+			navOptions: {
+				edit: true,
+				add: true,
+				del: true,
+				search: true,
+				refresh: true,
+				view: true,
+				position: 'left',
+				cloneToTop: false
+			},
+            searching: {
+            	closeAfterSearch: true,
+            	closeAfterReset: true,
+            	closeOnEscape: true,
+            	searchOnEnter: true,
+            	multipleSearch: true,
+            	multipleGroup: true,
+            	showQuery: true
+            },
+            onSelectRow: function(id, status, e) {
+            	if (status === true) {
+            		$('#grid2').jqGrid('setGridParam', {
+                		url: 'agent-sales-' + id + '.json',
+                		page: 1
+                	}).trigger('reloadGrid');
+                	var agentName = $('#grid1').jqGrid().getRowData(id).AgentName;
+                	$('#grid2').jqGrid('setCaption', 'Agent Sales Detail - ' + agentName);
+                	
+                	if ($('#grid2wrapper').is(':hidden')) {
+                		$('#grid2wrapper').show();
+                	}
+            	}
+            	else {
+            		if ($('#grid2wrapper').is(':visible')) {
+                		$('#grid2wrapper').hide();
+                	}
+            	}
+            }
+		});
+		$('#grid1').jqGrid('navGrid');
+		
+		// agent sales grid
+		$('#grid2').jqGrid({
+			url: 'agent-sales-1.json',
+			editurl: 'clientArray',
+			datatype: 'json',
+			colModel: [
+			    {
+			    	label: 'Deal Name',
+			    	name: 'DealName',
+			    	width: 140,
+			    	editable: true
+			    },
+			    {
+			    	label: 'Turnover',
+			    	name: 'Turnover',
+			    	width: 100,
+			    	editable: true
+			    }
+			],
+			sortname: 'Turnover',
+			sortorder: 'desc',
+			loadonce: false,
+			viewrecords: true,
+			width: 780,
+			height: 150,
+			caption: "Agent Sales Detail",
 			rownum: 5,
 			rowList: [5, 10, 20, "10000:All" ],
 			pager: true,
@@ -119,7 +199,10 @@
             	showQuery: true
             }
 		});
-		$('#grid1').jqGrid('navGrid');
+		$('#grid2').jqGrid('navGrid');
+		
+		// hide grid2 during initialisation
+		$('#grid2wrapper').hide();
 		
 		/*
 		$('#grid1').navGrid('#grid1-nav',
