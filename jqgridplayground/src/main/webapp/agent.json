@@ -1,8 +1,8 @@
 {
 	"rows":[
-		{"id":"1","AgentID":"1","AgentName":"John Lennon","AgentQuota":"$999,999"},
-		{"id":"2","AgentID":"2","AgentName":"Paul McCartney","AgentQuota":"$900,000"},
-		{"id":"3","AgentID":"3","AgentName":"Ringo Starr","AgentQuota":"$500,000"},
-		{"id":"4","AgentID":"4","AgentName":"George Harrison","AgentQuota":"$500,000"}
+		{"id":"1","AgentID":"1","AgentName":"John Lennon","AgentQuota":"$999,999","TargetReached":"Y","OnVacation":true},
+		{"id":"2","AgentID":"2","AgentName":"Paul McCartney","AgentQuota":"$900,000","TargetReached":"Y","OnVacation":false},
+		{"id":"3","AgentID":"3","AgentName":"Ringo Starr","AgentQuota":"$500,000","TargetReached":"","OnVacation":true},
+		{"id":"4","AgentID":"4","AgentName":"George Harrison","AgentQuota":"$500,000","TargetReached":"N","OnVacation":true}
 	]
 }

@@ -91,9 +91,33 @@
 			    	editable: true
 			    },
 			    {
-			    	label: 'Agent Quota',
+			    	label: 'Traget Quota',
 			    	name: 'AgentQuota',
 			    	width: 100,
+			    	editable: true
+			    },
+			    {
+			    	label: 'Target Reached',
+			    	name: 'TargetReached',
+			    	width: 60,
+			    	formatter: 'select',
+			    	editable: true,
+			    	edittype: 'select',
+			    	editoptions: {
+			    		value: ':Undefined;Y:Achieved;N:In Progress',
+			    		defaultValue: ''
+			    	},
+			    	stype: 'select',
+			    	searchoptions: {
+			    		sopt: ['eq', 'ne'],
+			    		value: ':Undefined;Y:Achieved;N:In Progress'
+			    	}
+			    },
+			    {
+			    	label: 'On Vacation',
+			    	name: 'OnVacation',
+			    	width: 40,
+			    	template: "booleanCheckboxFa",
 			    	editable: true
 			    }
 			],
