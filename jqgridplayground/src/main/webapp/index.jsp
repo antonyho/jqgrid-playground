@@ -119,6 +119,14 @@
 			    	width: 40,
 			    	template: "booleanCheckboxFa",
 			    	editable: true
+			    },
+			    {
+			    	label: 'Action Button',
+			    	name: '',
+			    	width: 40,
+			    	search: false,
+			    	sortable: false,
+			    	formatter: actionButtonFunc
 			    }
 			],
 			sortname: 'AgentID',
@@ -224,6 +232,10 @@
             }
 		});
 		$('#grid2').jqGrid('navGrid');
+		
+		function actionButtonFunc(cellValue, options, rowData, action) {
+			return '<button onclick="alert(' + rowData.AgentID + ')">Show ID</button>'
+		}
 		
 		// hide grid2 during initialisation
 		$('#grid2wrapper').hide();
